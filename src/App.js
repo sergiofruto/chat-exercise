@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import firebaseApp from './firebase-config';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
+
+const auth = firebaseApp.auth();
+
+auth.createUserWithEmailAndPassword('j@j.com', '123456')
+    .then(response => console.log('Response', response))
+    .catch(err => console.log(err));
 
 class App extends Component {
   state = {
