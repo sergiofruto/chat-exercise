@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { auth } from './firebase-config';
+import 'bulma/css/bulma.css' ;
+import Sidebar from './components/Sidebar';
+import MainPanel from './components/MainPanel';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
 
@@ -41,12 +44,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <SignUpForm onSignUp={this.handleSignUp} />
-        <LoginForm onLogin={this.handleLogin} />
-        <button onClick={this.handleLogout}>Log Out</button>
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
-        {this.state.isLoggedIn ? <p>You are logged in </p> : ''}
+      <div className="columns vh-100">
+        <Sidebar logout={this.handleLogout} />
+        <MainPanel logout={this.handleLogout} >
+          <SignUpForm onSignUp={this.handleSignUp} />
+          <LoginForm onLogin={this.handleLogin} />
+          <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        </MainPanel>
       </div>
     );
   }

@@ -29,22 +29,32 @@ class index extends Component {
 
   render() {  
     return (
-      <div>
-        <h1>Login Form</h1>
+      <div className="box">
+        <h1 className="title">Login Form</h1>
         <form action="" onSubmit={this.login}>
-          <input 
-            value={this.state.email}
-            type="text" 
-            laceholder="Email"
-            onChange={this.updateEmail}
-          />
-          <input
-            value={this.state.password}
-            type="password"
-            placeholder="Password"
-            onChange={this.updatePassword}
-          />
-          <button type="submit">Login</button>
+          <div className="field">
+            <div className="control">
+              <input 
+                className="input"
+                value={this.state.email}
+                type="text" 
+                laceholder="Email"
+                onChange={this.updateEmail}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
+                value={this.state.password}
+                type="password"
+                placeholder="Password"
+                onChange={this.updatePassword}
+              />
+            </div>
+          </div>
+          <button className="button is-primary is-fullwidth" type="submit">Login</button>
         </form>
       </div>
     );

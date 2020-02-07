@@ -30,22 +30,32 @@ class index extends Component {
   
   render() {  
     return (
-      <div>
-        <h1>Sign Up Form</h1>
+      <div className="box">
+        <h1 className="title">Sign Up Form</h1>
         <form action="" onSubmit={this.onSubmit}>
-          <input 
-            value={this.state.email}
-            type="text" 
-            laceholder="Email"
-            onChange={this.updateEmail}
-          />
-          <input
-            value={this.state.password}
-            type="password"
-            placeholder="Password"
-            onChange={this.updatePassword}
-          />
-          <button type="submit">Sign Up</button>
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
+                value={this.state.email}
+                type="text"
+                laceholder="Email"
+                onChange={this.updateEmail}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
+                value={this.state.password}
+                type="password"
+                placeholder="Password"
+                onChange={this.updatePassword}
+              />
+            </div>
+          </div>
+          <button className="button is-fullwidth is-primary" type="submit">Sign Up</button>
         </form>
       </div>
     );
