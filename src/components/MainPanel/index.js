@@ -1,6 +1,6 @@
 import React from 'react';
 
-const index = ({ children, logout }) => {
+const MainPanel = ({ children, logout }) => {
   return (
     <div className="column hero">
       <div className="hero-body">
@@ -14,5 +14,5 @@ const index = ({ children, logout }) => {
   );
 };
 
-export default index;
+export default MainPanel;
 

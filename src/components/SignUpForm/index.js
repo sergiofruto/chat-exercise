@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class index extends Component {
+class SignUpForm extends Component {
   state = {
     email: '',
     password: '',
@@ -62,4 +62,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default SignUpForm;
