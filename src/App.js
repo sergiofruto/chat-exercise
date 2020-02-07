@@ -1,43 +1,52 @@
 import React, { Component } from 'react';
-import firebaseApp from './firebase-config';
+import { auth } from './firebase-config';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
-
-const auth = firebaseApp.auth();
-
-auth.createUserWithEmailAndPassword('j@j.com', '123456')
-    .then(response => console.log('Response', response))
-    .catch(err => console.log(err));
 
 class App extends Component {
   state = {
     isLoggedIn: false,
     email: '',
-    hasSignedUp: false,
+    uid: null,
   };
 
-  handleSignUp = (e) => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      hasSignedUp: !prevState.hasSignedUp,
-    }));
-    console.log(this.state.hasSignedUp);
-  }
+  handleSignUp = ({ email, password }) => {
+    auth.createUserWithEmailAndPassword(email, password)
+      .catch(err => console.log(err))
+  };
 
-  handleLogin = (email) => {
-    this.setState({
-      isLoggedIn: true,
-      email: email,
-    })
-    console.log('Login', this.state);
-  }
+  handleLogin = ({ email, password }) => {
+    auth.signInWithEmailAndPassword(email, password)
+      .then(user => {
+        const { email, uid } = user.user;
+        this.setState({
+          isLoggedIn: true,
+          email,
+          uid,
+        });
+      })
+      .catch(err => console.log(err))
+  };
+
+  handleLogout = (e) => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          isLoggedIn: false,
+          email: '',
+          uid: null,
+        });
+      });
+  };
 
   render() {
     return (
       <div className="App">
         <SignUpForm onSignUp={this.handleSignUp} />
         <LoginForm onLogin={this.handleLogin} />
+        <button onClick={this.handleLogout}>Log Out</button>
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        {this.state.isLoggedIn ? <p>You are logged in </p> : ''}
       </div>
     );
   }

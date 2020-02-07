@@ -10,7 +10,6 @@ class index extends Component {
     this.setState({
       email: e.target.value,
     })
-    console.log(this.state);
   };
 
   updatePassword = (e) => {
@@ -21,7 +20,11 @@ class index extends Component {
 
   login = (e) => {
     e.preventDefault();
-    this.props.onLogin(this.state.email);
+    this.props.onLogin(this.state);
+    this.setState({
+      email: '',
+      password: '',
+    })
   }
 
   render() {  

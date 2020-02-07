@@ -10,7 +10,6 @@ class index extends Component {
     this.setState({
       email: e.target.value,
     })
-    console.log(this.state);
   };
 
   updatePassword = (e) => {
@@ -18,14 +17,22 @@ class index extends Component {
       password: e.target.value,
     })
   };
-  
-  render() {
+
+  onSubmit = (e) => {
+    e.preventDefault();
     const { onSignUp } = this.props;
+    onSignUp(this.state);
+    this.setState({
+      email: '',
+      password: '',
+    })
+  }
   
+  render() {  
     return (
       <div>
         <h1>Sign Up Form</h1>
-        <form action="" onSubmit={onSignUp}>
+        <form action="" onSubmit={this.onSubmit}>
           <input 
             value={this.state.email}
             type="text" 
