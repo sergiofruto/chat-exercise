@@ -1,10 +1,5 @@
 import React from 'react';
-
-const Message = ({ message }) => (
-  <li>
-    {message.text}
-  </li>
-);
+import Message from './../Message';
 
 const MessageList = ({ messages }) => {
   return (

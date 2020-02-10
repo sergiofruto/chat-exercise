@@ -55,6 +55,9 @@ class LoginForm extends Component {
             </div>
           </div>
           <button className="button is-primary is-fullwidth" type="submit">Login</button>
+          <a onClick={this.props.toggleLoginSignUp}>
+            Don't have an account? Sign up!
+          </a>
         </form>
       </div>
     );

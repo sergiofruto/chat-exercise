@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth } from './firebase-config';
+import { auth, messageRef, roomRef } from './firebase-config';
 import 'bulma/css/bulma.css' ;
 import Sidebar from './components/Sidebar';
 import MainPanel from './components/MainPanel';
@@ -9,38 +9,13 @@ import ChatPanel from './components/ChatPanel';
 
 class App extends Component {
   state = {
+    goToLogin: false,
     isLoggedIn: false,
     email: '',
     uid: null,
-    rooms: {
-      'hh12': {
-        title: 'General',
-        author: 'test@test.com',
-        created: Date.now(),
-      },
-      'jj34': {
-        title: 'Random',
-        author: 'test@test.com',
-        created: Date.now(),
-      },
-    },
-    selectedRoom: 'hh12',
-    messages: {
-      'm100': {
-        author: 'asdajnsd123123132',
-        email: 'test@test.com',
-        roomId: 'hh12',
-        text: 'test text 1',
-        created: Date.now(),
-      },
-      'm200': {
-        author: 'asdajnsd123123132',
-        email: 'test2@test.com',
-        roomId: 'hh12',
-        text: 'test text 2',
-        created: Date.now(),
-      }
-    }
+    rooms: {},
+    selectedRoom: null,
+    messages: {},
   };
 
   componentDidMount() {
@@ -53,8 +28,55 @@ class App extends Component {
           uid,
         });
       };
-    })
+      this.loadData();
+      roomRef.on('value', snapshot => {
+        console.log(snapshot.val());
+        const rooms = snapshot.val();
+        this.setState({
+          rooms,
+        });
+      });
+      messageRef.on('child_added', snapshot => {
+        console.log('lomensajito', snapshot.val());
+        const message = snapshot.val();
+        const key = snapshot.key;
+        if(message.roomId === this.state.selectedRoom) {
+          this.setState({
+            messages: {
+              ...this.state.messages,
+              [key]: message,
+            }
+          })
+        }
+      });
+    });
   }
+
+  loadData= () => {
+    roomRef.once('value')
+      .then(snapshot => {
+        const rooms = snapshot.val();
+        const selectedRoom = Object.keys(rooms)[0];
+        this.setState({
+          rooms,
+          selectedRoom,
+        })
+        return messageRef
+          .orderByChild('roomId')
+          .equalTo(selectedRoom)
+          .once('value')
+      })
+      .then(snapshot => {
+        console.log('messages', snapshot.val());
+        const messages = snapshot.val() || {};
+        this.setState({
+          messages,
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
+
 
   handleSignUp = ({ email, password }) => {
     auth.createUserWithEmailAndPassword(email, password)
@@ -86,10 +108,42 @@ class App extends Component {
   };
 
   setRoom = (id) => {
-    this.setState({
-      selectedRoom: id,
-    })
+    messageRef
+      .orderByChild('roomId')
+      .equalTo(id)
+      .once('value')
+      .then(snapshot => {
+        const messages = snapshot.val() || {};
+        this.setState({
+          selectedRoom: id,
+          messages,
+        });
+      })
+      .catch(err => console.log(err))
   }
+
+  addRoom = (roomName) => {
+    const room = {
+      author: this.state.uid,
+      name: roomName,
+      created: Date.now(),
+    }
+    roomRef.push(room);
+    console.log('app add', roomName);
+  }
+
+  sendMessage = (message) => {
+    console.log(message);
+    messageRef.push(message);
+  }
+
+  toggleLoginSignUp = () => {
+    this.setState(prevState => ({
+      goToLogin: !prevState.goToLogin
+    }));
+  }
+
+
 
   render() {
 
@@ -100,16 +154,23 @@ class App extends Component {
           rooms={this.state.rooms}
           selectedRoom={this.state.selectedRoom}
           setRoom={this.setRoom}
+          addRoom={this.addRoom}
         />
-        <MainPanel logout={this.handleLogout} >
           { this.state.isLoggedIn ?
-            <ChatPanel messages={this.state.messages}/> :
-            <div>
-              <SignUpForm onSignUp={this.handleSignUp} />
-              <LoginForm onLogin={this.handleLogin} />
-            </div>
+            <ChatPanel
+              messages={this.state.messages}
+              email={this.state.email}
+              roomId={this.state.selectedRoom}
+              uid={this.state.uid}
+              sendMessage={this.sendMessage}
+            /> :
+            <MainPanel logout={this.handleLogout} >
+              {this.state.goToLogin ? 
+                <LoginForm onLogin={this.handleLogin} toggleLoginSignUp={this.toggleLoginSignUp} /> :
+                <SignUpForm onSignUp={this.handleSignUp} toggleLoginSignUp={this.toggleLoginSignUp} />
+              }
+            </MainPanel>
           }
-        </MainPanel>
       </div>
     );
   }
