@@ -16,5 +16,10 @@ const firebaseApp = firebase.initializeApp(config);
 export const auth =firebaseApp.auth();
 export const messageRef = firebaseApp.database().ref('messages');
 export const roomRef = firebaseApp.database().ref('rooms');
+export const usersRef = firebaseApp.database().ref('users');
+
+// export const userRef = (email) => (
+//   firebaseApp.database().ref('users')
+// );
 
 export default firebaseApp;

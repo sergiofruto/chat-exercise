@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 
 class SignUpForm extends Component {
   state = {
+    name: '',
     email: '',
     password: '',
   }
+
+  updateName = (e) => {
+    this.setState({
+      name: e.target.value,
+    })
+  };
 
   updateEmail = (e) => {
     this.setState({
@@ -23,6 +30,7 @@ class SignUpForm extends Component {
     const { onSignUp } = this.props;
     onSignUp(this.state);
     this.setState({
+      name: '',
       email: '',
       password: '',
     })
@@ -37,9 +45,20 @@ class SignUpForm extends Component {
             <div className="control">
               <input
                 className="input"
+                value={this.state.name}
+                type="text"
+                placeholder="Name"
+                onChange={this.updateName}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
                 value={this.state.email}
                 type="text"
-                laceholder="Email"
+                placeholder="Email"
                 onChange={this.updateEmail}
               />
             </div>

@@ -11,9 +11,8 @@ class SendMessageForm extends Component {
     const message = {
       created: Date.now(),
       text: this.state.text,
-      author: this.props.uid,
+      author: this.props.email,
       roomId: this.props.roomId,
-      email: this.props.email,
     }
 
     this.props.sendMessage(message);

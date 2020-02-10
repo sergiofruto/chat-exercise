@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { auth, messageRef, roomRef } from './firebase-config';
+import { auth, messageRef, roomRef, usersRef } from './firebase-config';
 import 'bulma/css/bulma.css' ;
 import Sidebar from './components/Sidebar';
 import MainPanel from './components/MainPanel';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
 import ChatPanel from './components/ChatPanel';
+import firebaseApp from 'firebase';
 
 class App extends Component {
   state = {
@@ -29,15 +30,27 @@ class App extends Component {
         });
       };
       this.loadData();
+      usersRef
+        .orderByChild('email')
+        .equalTo(this.state.email)
+        .on('value', snapshot => {
+          const fullSnap = snapshot.val();
+          const filteredSnap = fullSnap[Object.keys(fullSnap)[0]];
+          const roomsSnap = filteredSnap.rooms;
+          const myRoomsKeys = Object.keys(roomsSnap);
+          return myRoomsKeys;
+        })
+        .then(snapshot => {
+          console.log(snapshot)
+        })
       roomRef.on('value', snapshot => {
-        console.log(snapshot.val());
         const rooms = snapshot.val();
+        console.log(rooms);
         this.setState({
           rooms,
         });
       });
       messageRef.on('child_added', snapshot => {
-        console.log('lomensajito', snapshot.val());
         const message = snapshot.val();
         const key = snapshot.key;
         if(message.roomId === this.state.selectedRoom) {
@@ -46,11 +59,11 @@ class App extends Component {
               ...this.state.messages,
               [key]: message,
             }
-          })
-        }
+          });
+        };
       });
     });
-  }
+  };
 
   loadData= () => {
     roomRef.once('value')
@@ -67,7 +80,6 @@ class App extends Component {
           .once('value')
       })
       .then(snapshot => {
-        console.log('messages', snapshot.val());
         const messages = snapshot.val() || {};
         this.setState({
           messages,
@@ -78,8 +90,16 @@ class App extends Component {
 
 
 
-  handleSignUp = ({ email, password }) => {
+  handleSignUp = ({ name, email, password }) => {
     auth.createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        const user = {
+          rooms: {},
+          name,
+          email,
+        }
+        usersRef.push(user);
+      })
       .catch(err => console.log(err))
   };
 
@@ -123,18 +143,39 @@ class App extends Component {
   }
 
   addRoom = (roomName) => {
+    const newRoomKey = firebaseApp.database().ref().child('rooms').push().key;
     const room = {
-      author: this.state.uid,
-      name: roomName,
       created: Date.now(),
-    }
-    roomRef.push(room);
-    console.log('app add', roomName);
+      members: {
+        one: this.state.email,
+        two: roomName,
+      }
+    };
+    firebaseApp.database().ref('rooms/' + newRoomKey).set(room);
+    // generate new key for the chat room and attach it to both users
+    usersRef
+      .orderByChild('email')
+      .equalTo(roomName)
+      .once('value')
+      .then(snapshot => {
+        const key = Object.keys(snapshot.val())[0];
+        firebaseApp.database().ref('users/' + key).child('rooms').update({ [newRoomKey]: true});
+      })
+    usersRef
+      .orderByChild('email')
+      .equalTo(this.state.email)
+      .once('value')
+      .then(snapshot => {
+        const key = Object.keys(snapshot.val())[0];
+        firebaseApp.database().ref('users/' + key).child('rooms').update({ [newRoomKey]: true });
+      })
+    this.setState({
+      selectedRoom: newRoomKey,
+    });
   }
 
   sendMessage = (message) => {
-    console.log(message);
-    messageRef.push(message);
+    firebaseApp.database().ref('messages/' + this.state.selectedRoom).push(message);
   }
 
   toggleLoginSignUp = () => {
