@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { auth, messageRef, roomRef } from './firebase-config';
+import _ from 'lodash';
+import { auth, messageRef, roomRef, activeTypingRef } from './firebase-config';
 import 'bulma/css/bulma.css' ;
 import Sidebar from './components/Sidebar';
 import MainPanel from './components/MainPanel';
@@ -16,7 +17,8 @@ class App extends Component {
     uid: null,
     rooms: {},
     selectedRoom: null,
-    messages: {}
+    messages: {},
+    otherUserTyping: false,
   }
 
   loadData = () => {
@@ -71,6 +73,18 @@ class App extends Component {
               })
             }
           });
+        activeTypingRef
+          .on('child_changed', snapshot => {
+            const typingKey = snapshot.key;
+            const typingValue = snapshot.val();
+            if (typingKey !== this.state.uid) {
+              this.setState({
+                otherUserTyping: typingValue,
+              });
+              console.log('otro esta tipeando');
+              console.log(snapshot.val());
+            }
+          })
       }
     });
   }
@@ -139,13 +153,14 @@ class App extends Component {
   }
 
   handleIsTyping = (value) => {
-    // roomRef.child('isTyping').set({ [this.state.email]: true})
-    (value !== '') 
-      ? firebaseApp.database().ref('activeTyping').set({ [this.state.uid]: true }) 
-      : firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: false })
-    // console.log('éntra', value);
-    // firebaseApp.database().ref('activeTyping').set({ [this.state.uid]: true})
+    console.log(value);
+    (!value) 
+      ? firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: false })
+      : firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: true }) 
+
   }
+
+  debouncedHandleIsTyping = _.debounce(this.handleIsTyping, 300);
 
   render() {
 
@@ -165,7 +180,8 @@ class App extends Component {
               roomId={this.state.selectedRoom}
               uid={this.state.uid}
               sendMessage={this.sendMessage}
-              handleIsTyping={this.handleIsTyping}
+              handleIsTyping={this.debouncedHandleIsTyping}
+              otherUserTyping={this.state.otherUserTyping}
             /> :
             <MainPanel logout={this.handleLogout} >
               {this.state.goToLogin ? 

@@ -17,6 +17,7 @@ export const auth =firebaseApp.auth();
 export const messageRef = firebaseApp.database().ref('messages');
 export const roomRef = firebaseApp.database().ref('rooms');
 export const usersRef = firebaseApp.database().ref('users');
+export const activeTypingRef = firebaseApp.database().ref('activeTyping');
 
 export const singleRoomRef = (id) => (
   firebaseApp.database().ref('rooms/' + id)

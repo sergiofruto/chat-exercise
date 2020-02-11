@@ -1,10 +1,13 @@
 import React from 'react';
 import Message from './../Message';
 
-const MessageList = ({ messages, email }) => {
+const MessageList = ({ messages, email, otherUserTyping }) => {
   return (
     <div>
-      <h1>Message list</h1>
+      <div className="header">
+        <h1>Demo Chat</h1>
+      </div>
+      {otherUserTyping ? <span>is typing</span> : ''}
       <ul>
         {
           Object.keys(messages)
