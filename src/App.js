@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { auth, messageRef, roomRef, activeTypingRef } from './firebase-config';
-import 'bulma/css/bulma.css' ;
 import Sidebar from './components/Sidebar';
 import MainPanel from './components/MainPanel';
 import SignUpForm from './components/SignUpForm';
@@ -166,14 +165,15 @@ class App extends Component {
 
     return (
       <div className="columns vh-100 is-gapless">
-        <Sidebar 
-          logout={this.handleLogout}
-          rooms={this.state.rooms}
-          selectedRoom={this.state.selectedRoom}
-          setRoom={this.setRoom}
-          addRoom={this.addRoom}
-        />
           { this.state.isLoggedIn ?
+          <MainPanel className="container">
+            <Sidebar 
+              logout={this.handleLogout}
+              rooms={this.state.rooms}
+              selectedRoom={this.state.selectedRoom}
+              setRoom={this.setRoom}
+              addRoom={this.addRoom}
+            />
             <ChatPanel
               messages={this.state.messages}
               email={this.state.email}
@@ -182,13 +182,14 @@ class App extends Component {
               sendMessage={this.sendMessage}
               handleIsTyping={this.debouncedHandleIsTyping}
               otherUserTyping={this.state.otherUserTyping}
-            /> :
-            <MainPanel logout={this.handleLogout} >
-              {this.state.goToLogin ? 
+            />
+          </MainPanel> :
+            <div className="container">
+              {this.state.goToLogin ?
                 <LoginForm onLogin={this.handleLogin} toggleLoginSignUp={this.toggleLoginSignUp} /> :
                 <SignUpForm onSignUp={this.handleSignUp} toggleLoginSignUp={this.toggleLoginSignUp} />
               }
-            </MainPanel>
+            </div>
           }
       </div>
     );

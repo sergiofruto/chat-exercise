@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SignUpLoginWrapper from './../SignUpLoginWrapper'
 
 class LoginForm extends Component {
   state = {
@@ -29,8 +30,7 @@ class LoginForm extends Component {
 
   render() {  
     return (
-      <div className="box">
-        <h1 className="title">Login Form</h1>
+      <SignUpLoginWrapper>
         <form action="" onSubmit={this.login}>
           <div className="field">
             <div className="control">
@@ -38,7 +38,7 @@ class LoginForm extends Component {
                 className="input"
                 value={this.state.email}
                 type="text" 
-                laceholder="Email"
+                placeholder="Email"
                 onChange={this.updateEmail}
               />
             </div>
@@ -55,11 +55,11 @@ class LoginForm extends Component {
             </div>
           </div>
           <button className="button is-primary is-fullwidth" type="submit">Login</button>
-          <a onClick={this.props.toggleLoginSignUp}>
+          <a className="bottom-link has-text-centered" onClick={this.props.toggleLoginSignUp}>
             Don't have an account? Sign up!
           </a>
         </form>
-      </div>
+      </SignUpLoginWrapper>
     );
   }
 }

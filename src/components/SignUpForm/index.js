@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SignUpLoginWrapper from  './../SignUpLoginWrapper'
+import './../../styles/sign-up.css'; 
 
 class SignUpForm extends Component {
   state = {
@@ -38,8 +40,7 @@ class SignUpForm extends Component {
   
   render() {  
     return (
-      <div className="box">
-        <h1 className="title">Sign Up Form</h1>
+      <SignUpLoginWrapper>
         <form action="" onSubmit={this.onSubmit}>
           <div className="field">
             <div className="control">
@@ -75,11 +76,11 @@ class SignUpForm extends Component {
             </div>
           </div>
           <button className="button is-fullwidth is-primary" type="submit">Sign Up</button>
-          <a onClick={this.props.toggleLoginSignUp}>
+          <a className="bottom-link has-text-centered" onClick={this.props.toggleLoginSignUp}>
             Already have an account? Log in!
           </a>
         </form>
-      </div>
+      </SignUpLoginWrapper>
     );
   }
 }

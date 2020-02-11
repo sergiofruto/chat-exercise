@@ -21,22 +21,19 @@ const RoomList = ({ rooms, selectedRoom, setRoom, addRoom }) => {
 
   return (
     <div>
-      <aside className="menu">
-        <h1 className="title">Rooms</h1>
-        <ul className="menu-list">
-          {roomComponents.map(roomObj => (
-            <Room
-              key={roomObj.id}
-              room={roomObj}
-              selectedRoom={selectedRoom}
-              setRoom={setRoom}
-            />
-          ))}
-        </ul>
-        <div className="">
-          <AddRoomForm addRoom={addRoom} />
-        </div>
-      </aside>
+      <ul className="menu-list">
+        {roomComponents.map(roomObj => (
+          <Room
+            key={roomObj.id}
+            room={roomObj}
+            selectedRoom={selectedRoom}
+            setRoom={setRoom}
+          />
+        ))}
+      </ul>
+      <div className="">
+        <AddRoomForm addRoom={addRoom} />
+      </div>
     </div>
   );
 };

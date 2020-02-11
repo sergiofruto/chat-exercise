@@ -1,0 +1,40 @@
+.outer-wrapper {
+  background-color: red;
+}
+
+.main-grid {
+  position: relative;
+}
+
+.main-grid .chat-panel {
+  position: absolute;
+  width: 100vw;
+  background-color: coral;
+  height: 100vh;
+  left: 100vw;
+} 
+
+/* .main-grid {
+  grid-template-columns: 100vw 100vw;
+  display: grid;
+  max-height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;	
+  overflow: scroll;
+} */
+
+/* .main-grid div:first-child {
+  background-color: aqua;
+} */
+
+/* .main-grid .chat-panel {
+  position: absolute;
+  width: 100vw;
+  background-color: coral;
+  height: 100vh;
+  left: 100vw;
+}  */
+
+/* .main-grid > div {
+	scroll-snap-align: start;
+} */

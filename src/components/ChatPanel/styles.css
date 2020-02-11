@@ -1,0 +1,7 @@
+.main-grid .chat-panel {
+  position: absolute;
+  width: 100vw;
+  background-color: coral;
+  height: 100vh;
+  left: 100vw;
+} 

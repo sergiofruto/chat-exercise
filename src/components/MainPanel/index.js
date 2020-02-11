@@ -1,14 +1,11 @@
 import React from 'react';
+import './styles.css'; 
 
 const MainPanel = ({ children, logout }) => {
   return (
-    <div className="column hero">
-      <div className="hero-body">
-        <div className="columns is-centered">
-          <div className="column is-half">
-            {children}
-          </div>
-        </div>
+    <div className="outer-wrapper">
+      <div className="main-grid">
+        {children}
       </div>
     </div>
   );

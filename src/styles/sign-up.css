@@ -1,0 +1,19 @@
+.signup-fullheight {
+  height: 100vh;
+  position: relative;
+}
+
+.form-wrapper {
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+
+.sign-up-logo {
+  text-align: center;
+  padding: 24px 0 32px;
+}
+
+.bottom-link {
+  display: block;
+  margin-top: 16px;
+}

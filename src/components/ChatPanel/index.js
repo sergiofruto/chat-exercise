@@ -1,11 +1,11 @@
 import React from 'react';
 import MessageList from './../MessageList';
 import SendMessageForm from './../SendMessageForm';
-import { ChatPanelStyled } from './styled';
+import './styles.css';
 
 const ChatPanel = ({ messages, email, sendMessage, roomId, uid, handleIsTyping, otherUserTyping }) => {
   return (
-    <ChatPanelStyled>
+    <div className="chat-panel">
       <MessageList messages={messages} email={email} otherUserTyping={otherUserTyping}/>
       <SendMessageForm
         email={email}
@@ -14,7 +14,7 @@ const ChatPanel = ({ messages, email, sendMessage, roomId, uid, handleIsTyping, 
         sendMessage={sendMessage}
         handleIsTyping={handleIsTyping}
       />
-    </ChatPanelStyled>
+    </div>
   );
 };
 
