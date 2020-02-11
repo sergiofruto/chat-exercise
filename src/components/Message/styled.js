@@ -6,7 +6,7 @@ export const MessageStyled = styled.li`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
-  background-color: hsl(217, 71%, 53%);
+  background-color: ${props => (props.messageEmail === props.myEmail) ? "palevioletred" : 'lightblue'};
   color: #fff;
 `;
 

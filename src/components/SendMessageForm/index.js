@@ -8,15 +8,24 @@ class SendMessageForm extends Component {
 
   onMessageSend = (e) => {
     e.preventDefault();
-    const message = {
-      created: Date.now(),
-      text: this.state.text,
-      author: this.props.email,
-      roomId: this.props.roomId,
+    if(this.state.text) {
+      const message = {
+        created: Date.now(),
+        text: this.state.text,
+        author: this.props.email,
+        roomId: this.props.roomId,
+      }
+  
+      this.props.sendMessage(message);
+      this.setState({text: ''});
     }
+  }
 
-    this.props.sendMessage(message);
-    this.setState({text: ''});
+  onInputTyping = (e) => {
+    this.setState({
+      text: e.target.value,
+    });
+    this.props.handleIsTyping(this.state.text);
   }
 
   render() {
@@ -27,7 +36,7 @@ class SendMessageForm extends Component {
             type="text"
             placeholder="write something"
             value={this.state.text}
-            onChange={(e) => this.setState({ text: e.target.value })}
+            onChange={this.onInputTyping}
           />
         </form>
       </div>

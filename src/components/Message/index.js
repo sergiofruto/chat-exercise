@@ -3,9 +3,9 @@ import moment from 'moment';
 
 import { MessageStyled, MessageSender, MessageTimeStamp } from './styled';
 
-const Message = ({ message }) => (
-  <MessageStyled>
-    <MessageSender>{message.email}</MessageSender>
+const Message = ({ message, email }) => (
+  <MessageStyled myEmail={email} messageEmail={message.author}>
+    <MessageSender>{message.author}</MessageSender>
     {message.text}
     <MessageTimeStamp>
       {moment(message.created).format('h:mm a')}
