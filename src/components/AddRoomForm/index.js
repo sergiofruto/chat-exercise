@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles.css';
 
 class AddRoomForm extends Component {
   state = {
@@ -26,7 +27,7 @@ class AddRoomForm extends Component {
 
   render() {  
     return (
-      <form action="" onSubmit={this.handleAddRoom}>
+      <form className="add-room-form" onSubmit={this.handleAddRoom}>
         <div className="control">
           <input type="text" 
             placeholder="Room Name..."

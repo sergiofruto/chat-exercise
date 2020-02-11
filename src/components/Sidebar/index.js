@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RoomList from './../RoomList';
+import './styles.css';
 
-const SideBar = ({ logout, rooms, selectedRoom, setRoom, addRoom }) => {
+const SideBar = ({ toggleMenu, menuOpen, logout, rooms, selectedRoom, setRoom, addRoom }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <aside>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
+      <nav className="navbar rooms-header" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="https://bulma.io">
             <img src="https://lever-client-logos.s3.amazonaws.com/fae1a084-c900-4fbe-9706-2620e45a2814-1575406000855.png" alt="demo chat app" width="112" height="28" />
           </a>
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span onClick={() => setIsMenuOpen(!isMenuOpen)} role="button" className={`navbar-burger ${isMenuOpen ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </span>
         </div>
-        <div class="navbar-menu">
-          <button className="button top-right-button" onClick={logout}>Log Out</button>
+        <div className={`navbar-menu ${isMenuOpen ? 'is-active' : ''}`}>
+          <button className="button is-small is-white top-right-button" onClick={logout}>Log Out</button>
         </div>
       </nav>
       <RoomList

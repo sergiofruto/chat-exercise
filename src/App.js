@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     isLoggedIn: false,
     goToLogin: false,
+    slideInChat: false,
     email: '',
     uid: null,
     rooms: {},
@@ -124,6 +125,9 @@ class App extends Component {
   }
 
   setRoom = (id) => {
+    this.setState({
+      slideInChat: true,
+    })
     messageRef
       .orderByChild('roomId')
       .equalTo(id)
@@ -156,7 +160,6 @@ class App extends Component {
     (!value) 
       ? firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: false })
       : firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: true }) 
-
   }
 
   debouncedHandleIsTyping = _.debounce(this.handleIsTyping, 300);
@@ -182,6 +185,7 @@ class App extends Component {
               sendMessage={this.sendMessage}
               handleIsTyping={this.debouncedHandleIsTyping}
               otherUserTyping={this.state.otherUserTyping}
+              slideInChat={this.state.slideInChat}
             />
           </MainPanel> :
             <div className="container">

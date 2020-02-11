@@ -1,13 +1,17 @@
 import React from 'react';
 import AddRoomForm from './../AddRoomForm';
+import './styles.css';
+import placeholder from './../../avatar-placeholder.png';
+// const placeholder = require ('./avatar-placeholder.png');
 
 const Room = ({ room, selectedRoom, setRoom }) => {
   const styles = selectedRoom === room.id ? 'room-active': 'room';
   return (
-    <li className={styles}  key={room.id}>
-      <a onClick={() => setRoom(room.id)}>
-        {room.name}
-      </a>
+    <li className={`room-item ${styles}`}  key={room.id}>
+      <div className="inner-item" onClick={() => setRoom(room.id)}>
+        <img src={placeholder} alt=""/>
+        <span>{room.name}</span>
+      </div>
     </li>
   );
 }
@@ -21,7 +25,7 @@ const RoomList = ({ rooms, selectedRoom, setRoom, addRoom }) => {
 
   return (
     <div>
-      <ul className="menu-list">
+      <ul className="room-list">
         {roomComponents.map(roomObj => (
           <Room
             key={roomObj.id}
