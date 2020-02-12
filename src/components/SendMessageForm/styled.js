@@ -5,4 +5,7 @@ export const InputStyled = styled.input`
   height: 70px;
   font-size: 16px;
   padding: 0 16px;
+  @media (min-width: 1024px) {
+    height: 50px;
+  }
 `;

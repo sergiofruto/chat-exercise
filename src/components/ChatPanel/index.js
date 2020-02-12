@@ -22,7 +22,7 @@ const ChatPanel = ({
       <div className="header-wrapper">
         <nav className="navbar rooms-header" role="navigation" aria-label="main navigation">
           <div className="chat-header">
-            <FontAwesomeIcon onClick={backToRooms} icon={faArrowLeft} color="white" />
+            <FontAwesomeIcon className="back-to-rooms-cta" onClick={backToRooms} icon={faArrowLeft} color="white" />
             <img src={placeholder} alt="" />
             <div className="chat-header-info">
               <span className="chat-header-title">Demo Chat</span>

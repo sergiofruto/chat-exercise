@@ -22,3 +22,12 @@
 .chat-header-info span {
   display: block;
 }
+
+@media(min-width: 1024px) {
+  .chat-header {
+    grid-template-columns: 50px 1fr;
+  }
+  .back-to-rooms-cta {
+    display: none;
+  }
+}

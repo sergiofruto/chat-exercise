@@ -28,6 +28,9 @@ const SideBar = ({ toggleMenu, menuOpen, logout, rooms, selectedRoom, setRoom, a
         setRoom={setRoom}
         addRoom={addRoom}
       />
+      <div className="desktop-logout-cta">
+        <button className="button is-white is-fullwidth is-white top-right-button" onClick={logout}>Log Out</button>
+      </div>
     </aside>
   );
 };

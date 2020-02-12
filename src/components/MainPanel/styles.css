@@ -26,6 +26,9 @@
   overflow: scroll;
   padding: 16px;
 }
+  .main-grid aside .desktop-logout-cta  {
+    display: none;
+  }
 
 @media(min-width: 1024px) {
   .main-grid {
@@ -36,16 +39,21 @@
 
   .main-grid aside {
     display: grid;
-    grid-template-rows: 70px 1fr;
+    grid-template-rows: 70px 1fr 50px;
   }
 
   .main-grid aside .navbar-menu  {
     display: none;
   }
 
+  .main-grid aside .desktop-logout-cta  {
+    display: block;
+  }
+
   .chat-panel {
     width: 100%;
     position: initial;
     left: initial;
+    grid-template-rows: 70px 1fr 50px;
   }
 }
