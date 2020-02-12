@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 
-import { MessageStyled, MessageSender, MessageTimeStamp } from './styled';
+import { MessageStyled, MessageSender, MessageTimeStamp, MessageText } from './styled';
 
 const Message = ({ message, email }) => (
   <MessageStyled myEmail={email} messageEmail={message.author}>
     <MessageSender>{message.author}</MessageSender>
-    {message.text}
+    <MessageText>{message.text}</MessageText>
     <MessageTimeStamp>
       {moment(message.created).format('h:mm a')}
     </MessageTimeStamp>

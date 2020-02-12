@@ -20,7 +20,6 @@ const RoomList = ({ rooms, selectedRoom, setRoom, addRoom }) => {
     ...rooms[roomKey],
     id: roomKey
   }))
-  // console.log('proccess', roomComponents);
 
   return (
     <div>

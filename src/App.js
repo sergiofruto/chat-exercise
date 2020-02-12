@@ -81,8 +81,6 @@ class App extends Component {
               this.setState({
                 otherUserTyping: typingValue,
               });
-              console.log('otro esta tipeando');
-              console.log(snapshot.val());
             }
           })
       }
@@ -156,7 +154,6 @@ class App extends Component {
   }
 
   handleIsTyping = (value) => {
-    console.log(value);
     (!value) 
       ? firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: false })
       : firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: true }) 

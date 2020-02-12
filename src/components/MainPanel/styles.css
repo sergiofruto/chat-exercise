@@ -1,13 +1,5 @@
-.outer-wrapper {
-  background-color: red;
-}
-
 .main-grid {
   position: relative;
-}
-
-.sarasa {
-  color: red;
 }
 
 .chat-panel {
@@ -32,10 +24,28 @@
 .list-container {
   max-height: calc(100vh - 70px - 70px);
   overflow: scroll;
-  padding: 0 16px;
+  padding: 16px;
 }
 
-/* .message-list {
-  max-height: calc(100vh - 70px - 70px);
-  overflow: scroll;
-} */
+@media(min-width: 1024px) {
+  .main-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    width: 100vw;
+  }
+
+  .main-grid aside {
+    display: grid;
+    grid-template-rows: 70px 1fr;
+  }
+
+  .main-grid aside .navbar-menu  {
+    display: none;
+  }
+
+  .chat-panel {
+    width: 100%;
+    position: initial;
+    left: initial;
+  }
+}
