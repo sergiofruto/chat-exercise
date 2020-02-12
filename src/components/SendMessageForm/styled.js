@@ -8,4 +8,7 @@ export const InputStyled = styled.input`
   @media (min-width: 1024px) {
     height: 50px;
   }
+  &:focus {
+    outline: none;
+  }
 `;
