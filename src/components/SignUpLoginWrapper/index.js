@@ -2,7 +2,7 @@ import React from 'react';
 
 const SignUpLoginWrapper = ({ children }) => {
   return (
-    <div className="hero is-primary signup-fullheight">
+    <div className="hero is-primary signup-fullheight has-background-primary">
       <div className="hero-body">
         <div className="form-wrapper has-background-light">
           <div className="column if-half">

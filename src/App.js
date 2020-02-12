@@ -170,7 +170,7 @@ class App extends Component {
   render() {
 
     return (
-      <div className="columns vh-100 is-gapless">
+      <div className="columns vh-100 is-gapless has-background-primary">
           { this.state.isLoggedIn ?
           <MainPanel className="container">
             <Sidebar 

@@ -26,9 +26,14 @@
   overflow: scroll;
   padding: 16px;
 }
-  .main-grid aside .desktop-logout-cta  {
-    display: none;
-  }
+
+.main-grid aside {
+  background-color: white;
+}
+
+.main-grid aside .desktop-logout-cta  {
+  display: none;
+}
 
 @media(min-width: 1024px) {
   .main-grid {
