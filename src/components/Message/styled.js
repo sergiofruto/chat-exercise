@@ -6,8 +6,8 @@ export const MessageStyled = styled.li`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
-  background-color: ${props => (props.messageEmail === props.myEmail) ? "palevioletred" : 'lightblue'};
-  color: #fff;
+  background-color: ${props => (props.messageEmail === props.myEmail) ? "#d2d2d2" : '#66bcf4'};
+  color: black;
 `;
 
 export const MessageSender = styled.span`

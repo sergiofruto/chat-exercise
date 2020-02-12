@@ -1,7 +1,24 @@
-.main-grid .chat-panel {
-  position: absolute;
-  width: 100vw;
-  background-color: coral;
-  height: 100vh;
-  left: 100vw;
-} 
+.chat-header-title {
+  color: white;
+  font-weight: 500;
+}
+.chat-header {
+  display: grid;
+  grid-template-columns: 30px 50px 1fr;
+  grid-column-gap: 15px;
+  align-items: center;
+  padding: 10px;
+}
+
+.header-wrapper {
+  position: sticky;
+  top: 0;
+}
+
+.chat-header-info {
+  color: white;
+}
+
+.chat-header-info span {
+  display: block;
+}

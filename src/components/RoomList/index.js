@@ -1,8 +1,7 @@
 import React from 'react';
 import AddRoomForm from './../AddRoomForm';
 import './styles.css';
-import placeholder from './../../avatar-placeholder.png';
-// const placeholder = require ('./avatar-placeholder.png');
+import placeholder from './../../assets/img/avatar-placeholder.png';
 
 const Room = ({ room, selectedRoom, setRoom }) => {
   const styles = selectedRoom === room.id ? 'room-active': 'room';

@@ -3,10 +3,7 @@ import Message from './../Message';
 
 const MessageList = ({ messages, email, otherUserTyping }) => {
   return (
-    <div>
-      <div className="">
-        <h1>Demo Chat</h1>
-      </div>
+    <div className="list-container">
       {otherUserTyping ? <span>is typing</span> : ''}
       <ul>
         {

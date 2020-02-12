@@ -162,6 +162,12 @@ class App extends Component {
       : firebaseApp.database().ref('activeTyping').update({ [this.state.uid]: true }) 
   }
 
+  handleBackToRooms = () => {
+    this.setState({
+      slideInChat: false,
+    })
+  }
+
   debouncedHandleIsTyping = _.debounce(this.handleIsTyping, 300);
 
   render() {
@@ -186,6 +192,7 @@ class App extends Component {
               handleIsTyping={this.debouncedHandleIsTyping}
               otherUserTyping={this.state.otherUserTyping}
               slideInChat={this.state.slideInChat}
+              backToRooms={this.handleBackToRooms}
             />
           </MainPanel> :
             <div className="container">

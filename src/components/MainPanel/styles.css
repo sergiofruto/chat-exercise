@@ -6,35 +6,36 @@
   position: relative;
 }
 
-.main-grid .chat-panel {
+.sarasa {
+  color: red;
+}
+
+.chat-panel {
   position: absolute;
   width: 100vw;
-  background-color: coral;
   height: 100vh;
-  left: 100vw;
-} 
-
-/* .main-grid {
-  grid-template-columns: 100vw 100vw;
   display: grid;
+  grid-template-rows: 70px 1fr 70px;
   max-height: 100vh;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;	
-  overflow: scroll;
-} */
-
-/* .main-grid div:first-child {
-  background-color: aqua;
-} */
-
-/* .main-grid .chat-panel {
-  position: absolute;
-  width: 100vw;
-  background-color: coral;
-  height: 100vh;
+  background-color: lightcyan;
+  top: 0;
   left: 100vw;
-}  */
+  transition: left .25s linear;
+  z-index: 100;
+}
 
-/* .main-grid > div {
-	scroll-snap-align: start;
+.chat-panel.is-active {
+  left: 0;
+  transition: left .25s linear;
+}
+
+.list-container {
+  max-height: calc(100vh - 70px - 70px);
+  overflow: scroll;
+  padding: 0 16px;
+}
+
+/* .message-list {
+  max-height: calc(100vh - 70px - 70px);
+  overflow: scroll;
 } */
