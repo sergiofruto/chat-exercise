@@ -62,3 +62,7 @@
     grid-template-rows: 70px 1fr 50px;
   }
 }
+
+.sign-up-login-wrapper {
+  width: 100%;
+}

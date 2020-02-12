@@ -170,7 +170,7 @@ class App extends Component {
   render() {
 
     return (
-      <div className="columns vh-100 is-gapless has-background-primary">
+      <div className="root-container columns vh-100 is-gapless">
           { this.state.isLoggedIn ?
           <MainPanel className="container">
             <Sidebar 
@@ -192,12 +192,14 @@ class App extends Component {
               backToRooms={this.handleBackToRooms}
             />
           </MainPanel> :
+          <div className="sign-up-login-wrapper has-background-primary">
             <div className="container">
               {this.state.goToLogin ?
                 <LoginForm onLogin={this.handleLogin} toggleLoginSignUp={this.toggleLoginSignUp} /> :
                 <SignUpForm onSignUp={this.handleSignUp} toggleLoginSignUp={this.toggleLoginSignUp} />
               }
             </div>
+          </div>
           }
       </div>
     );
