@@ -50,5 +50,6 @@ Ideally I would have written everything with Styled Components, but at some poin
 3: I don't think I can share with you the data model from Firebase, but basically what I do is to create rooms with an roomId, and then I create messages that have a property with that roomId, and that's what I use to fetch all the messages for the chat. 
 Let me know if you want to and maybe I can try to give you permissions to check the firebase model or I can just send a screenshot. 
 
+4: Another thing I would have done if I had more is deattach all the firebase logic inside the react application. Maybe creating a facade  for all the firebase methods so the frontend wont be as messy as it is right now.
 
 Let me know if you need any more details.
