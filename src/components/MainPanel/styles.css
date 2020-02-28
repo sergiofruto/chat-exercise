@@ -35,6 +35,10 @@
   display: none;
 }
 
+.outer-wrapper {
+  width: 100%;
+}
+
 @media(min-width: 1024px) {
   .main-grid {
     display: grid;

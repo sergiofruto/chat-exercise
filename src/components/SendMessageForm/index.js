@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { InputStyled } from './styled';
 
-
 class SendMessageForm extends Component {
   state = {
     text: '',
@@ -18,6 +17,7 @@ class SendMessageForm extends Component {
       };
       this.props.sendMessage(message);
       this.setState({text: ''});
+      this.props.handleIsTyping('');
     }
   }
 

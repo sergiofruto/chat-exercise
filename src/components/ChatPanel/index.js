@@ -26,7 +26,7 @@ const ChatPanel = ({
             <img src={placeholder} alt="" />
             <div className="chat-header-info">
               <span className="chat-header-title">Demo Chat</span>
-              <span>{otherUserTyping ? '...is typing' : 'Online'}</span>
+              <span>{otherUserTyping ? `${uid} is typing` : 'Online'}</span>
             </div>
           </div>
         </nav>

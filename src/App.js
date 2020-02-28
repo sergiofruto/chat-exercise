@@ -90,6 +90,7 @@ class App extends Component {
   handleSignUp = ({ email, password }) => {
     auth.createUserWithEmailAndPassword(email, password)
       .catch(err => console.error(err));
+
   }
 
   handleLogin = ({ email, password }) => {

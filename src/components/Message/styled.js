@@ -15,6 +15,9 @@ export const MessageStyled = styled.li`
 export const MessageText = styled.p`
   font-size: 16px;
   padding: 10px 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 `;
 
 export const MessageSender = styled.span`

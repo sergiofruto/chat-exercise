@@ -9,7 +9,7 @@ const SideBar = ({ toggleMenu, menuOpen, logout, rooms, selectedRoom, setRoom, a
     <aside>
       <nav className="navbar rooms-header" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          <a className="navbar-item" href="#">
             <img src="https://lever-client-logos.s3.amazonaws.com/fae1a084-c900-4fbe-9706-2620e45a2814-1575406000855.png" alt="demo chat app" width="112" height="28" />
           </a>
           <span onClick={() => setIsMenuOpen(!isMenuOpen)} role="button" className={`navbar-burger ${isMenuOpen ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false">
